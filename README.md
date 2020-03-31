@@ -8,8 +8,29 @@ TLDR - `@BeforeClass` annotations in Suites cause build failures when using the 
 1. Fresh maven app created following the maven gettings started guides - https://maven.apache.org/guides/getting-started/ . 
 2. Create a `TestSuite` with two tests `ATestClass` and `BTestClass`, with some `@BeforeClass` setup method. This might be used to set up an expensive database or something.
 3. Throw an exception in that `@BeforeClass` method.
-4. Set the appropriate surefire test provider - (commented out in pom.xml). 
-4. `mvn test`. 
+4. Set the appropriate surefire test provider - (commented out in pom.xml):
+```
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.version}</version>
+          <dependencies>
+            <!-- Uncomment this and the tests behave as expected (fail due to failure in BeforeClass in Suite)
+            <dependency>
+              <groupId>org.apache.maven.surefire</groupId>
+              <artifactId>surefire-junit47</artifactId>
+              <version>${surefire.version}</version>
+            </dependency> -->
+            <!-- Uncomment this to explicitly use the surefire-junit-platform runner, which has the same behaviour as when it's commented out. 
+            <dependency>
+              <groupId>org.apache.maven.surefire</groupId>
+              <artifactId>surefire-junit-platform</artifactId>
+              <version>${surefire.version}</version>
+            </dependency> -->
+          </dependencies>
+        </plugin>
+```
+
+5. `mvn test`. 
 
 # Surefire-Junit47 Behaviour (Expected Behaviour)
 
