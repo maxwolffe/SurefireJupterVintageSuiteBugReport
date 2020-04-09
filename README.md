@@ -1,5 +1,5 @@
 # Background
-Junit 5 (Jupiter) has the ability to run Junit4 tests using a Junit Vintage Test Engine (https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4-running). There appears to be a discrepancy in how configuration failures are handled for Suites in the Surefire Junit47 provier and the Surefire-Junit-Platform provider using the Jupter Vintage Test Engine.
+Junit 5 (Jupiter) has the ability to run Junit4 tests using a Junit Vintage Test Engine (https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4-running). There appears to be a discrepancy in how configuration failures are handled for Suites in the Surefire Junit47 provier and the Surefire-Junit-Platform provider using the Jupter Vintage Test
 
 TLDR - `@BeforeClass` annotations in Suites cause build failures when using the Surefire-Junit47 provider but don't when using the Surefire-Junit-Platform provider with Junit-Vintage-Test-Engine.
 
